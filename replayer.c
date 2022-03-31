@@ -59,7 +59,7 @@ int64_t jobtracker = 0;
 
 static int64_t get_disksz(int devfd)
 {
-    printf("get_disksz");
+    printf("(replayer.c) get_disksz\n");
     int64_t sz;
 
     ioctl(devfd, BLKGETSIZE64, &sz);
@@ -70,7 +70,7 @@ static int64_t get_disksz(int devfd)
 
 int mkdirr(const char *path, const mode_t mode, const int fail_on_exist)
 {
-    printf("mkdirr");
+    printf("(replayer.c) mkdirr\n");
     int result = 0;
     char *dir = NULL;
     do
@@ -105,7 +105,7 @@ int mkdirr(const char *path, const mode_t mode, const int fail_on_exist)
 void prepare_metrics(char *logfile)
 {
 
-    printf("prepare_metrics");
+    printf("(replayer.c) prepare_metrics\n");
     if (-1 == mkdirr(logfile, 0755, 0))
     {
         perror("mkdirr() failed()");
@@ -143,7 +143,7 @@ void prepare_metrics(char *logfile)
 
 int64_t read_trace(char ***req, char *tracefile)
 {
-    printf("read_trace");
+    printf("(replayer.c) read_trace\n");
     char line[1024];
     int64_t nr_lines = 0, i = 0;
     int ch;
@@ -196,7 +196,7 @@ int64_t read_trace(char ***req, char *tracefile)
 
 void parse_io(char **reqs)
 {
-    printf("parse_io");
+    printf("(replayer.c) parse_io\n");
     char *one_io;
     int64_t i = 0;
 
@@ -251,7 +251,7 @@ void parse_io(char **reqs)
 
 void *perform_io()
 {
-    printf("perform_io");
+    printf("(replayer.c) perform_io\n");
     int64_t cur_idx;
     int mylatecount = 0;
     int myslackcount = 0;
@@ -406,7 +406,7 @@ void *perform_io()
 
 void *pr_progress()
 {
-    printf("pr_progress");
+    printf("(replayer.c) pr_progress\n");
     int64_t progress, np;
     int64_t cur_late_cnt, cur_slack_cnt;
 
@@ -438,7 +438,7 @@ void *pr_progress()
 
 void do_replay(void)
 {
-    printf("do_replay");
+    printf("(replayer.c) do_replay\n");
     pthread_t track_thread; //progress
     struct timeval t1, t2;
     float totaltime;
@@ -495,7 +495,7 @@ void do_replay(void)
 
 int main(int argc, char **argv)
 {
-    printf("replayer runned!");
+    printf("(replayer.c) replayer runned!\n");
     char device[64];
     char tracefile[256], logfile[256];
     char **request;
