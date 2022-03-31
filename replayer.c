@@ -495,7 +495,7 @@ void do_replay(void)
 
 int main(int argc, char **argv)
 {
-    printf("(replayer.c) replayer runned!\n");
+    printf("(replayer.c) main\n");
     char device[64];
     char tracefile[256], logfile[256];
     char **request;
