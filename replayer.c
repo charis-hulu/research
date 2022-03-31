@@ -59,6 +59,7 @@ int64_t jobtracker = 0;
 
 static int64_t get_disksz(int devfd)
 {
+    printf("get_disksz");
     int64_t sz;
 
     ioctl(devfd, BLKGETSIZE64, &sz);
@@ -69,6 +70,7 @@ static int64_t get_disksz(int devfd)
 
 int mkdirr(const char *path, const mode_t mode, const int fail_on_exist)
 {
+    printf("mkdirr");
     int result = 0;
     char *dir = NULL;
     do
@@ -102,6 +104,8 @@ int mkdirr(const char *path, const mode_t mode, const int fail_on_exist)
 
 void prepare_metrics(char *logfile)
 {
+
+    printf("prepare_metrics");
     if (-1 == mkdirr(logfile, 0755, 0))
     {
         perror("mkdirr() failed()");
@@ -139,6 +143,7 @@ void prepare_metrics(char *logfile)
 
 int64_t read_trace(char ***req, char *tracefile)
 {
+    printf("read_trace");
     char line[1024];
     int64_t nr_lines = 0, i = 0;
     int ch;
@@ -191,6 +196,7 @@ int64_t read_trace(char ***req, char *tracefile)
 
 void parse_io(char **reqs)
 {
+    printf("parse_io");
     char *one_io;
     int64_t i = 0;
 
@@ -245,6 +251,7 @@ void parse_io(char **reqs)
 
 void *perform_io()
 {
+    printf("perform_io");
     int64_t cur_idx;
     int mylatecount = 0;
     int myslackcount = 0;
@@ -399,6 +406,7 @@ void *perform_io()
 
 void *pr_progress()
 {
+    printf("pr_progress");
     int64_t progress, np;
     int64_t cur_late_cnt, cur_slack_cnt;
 
@@ -430,6 +438,7 @@ void *pr_progress()
 
 void do_replay(void)
 {
+    printf("do_replay");
     pthread_t track_thread; //progress
     struct timeval t1, t2;
     float totaltime;
@@ -486,6 +495,7 @@ void do_replay(void)
 
 int main(int argc, char **argv)
 {
+    printf("replayer runned!");
     char device[64];
     char tracefile[256], logfile[256];
     char **request;
